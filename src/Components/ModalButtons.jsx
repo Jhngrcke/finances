@@ -46,9 +46,9 @@ function IncomeForm({input, handleChange}) {
         <Form>
             <Form.Group className='mb-3' controlId='formFinancialData'>
                 <Form.Label>Income name</Form.Label>
-                <Form.Control type='text' placeholder='Salary/Investment/Other' onChange={handleChange} />
+                <Form.Control type='text' name='incname' placeholder='Salary/Investment/Other' onChange={handleChange} />
                 <Form.Label>Income amount</Form.Label>
-                <Form.Control type='text' placeholder='Enter Income Amount'  onChange={handleChange} />
+                <Form.Control type='text' name='incamount' placeholder='Enter Income Amount'  onChange={handleChange} />
                 <Form.Label>Income type</Form.Label>
                 <Form.Select aria-label="inctype" onChange={handleChange}>
                     <option value="1">Salary</option>
@@ -63,14 +63,14 @@ function IncomeForm({input, handleChange}) {
 
 function AccountForm({input, handleChange}) { 
     return (
-        <Form>
+        <Form name='accform'>
             <Form.Group className='mb-3' controlId='formFinancialData'>
                 <Form.Label>Card name</Form.Label>
-                <Form.Control type='text' placeholder='Cheque/Savings/Credit Account' onChange={handleChange} />
+                <Form.Control type='text' name='cardname' placeholder='Cheque/Savings/Credit Account' onChange={handleChange} />
                 <Form.Label>Card number</Form.Label>
-                <Form.Control type='text' placeholder='Enter Card Number' onChange={handleChange} />
+                <Form.Control type='text'name='cardnum' placeholder='Enter Card Number' onChange={handleChange} />
                 <Form.Label>Card type</Form.Label>
-                <Form.Select aria-label="inctype" onChange={handleChange}>
+                <Form.Select aria-label="acctype" name='cardtype' onChange={handleChange}>
                     <option value="1">Cheque</option>
                     <option value="2">Savings</option>
                     <option value="3">Credit</option>
@@ -91,16 +91,17 @@ function CreateButton (opts) {
     const [input, setInput] = useState({});
 
     const handleChange = (ev) => {
+        console.log(ev.target.name);
         setInput({
             ...input,
             [ev.target.name]: ev.target.value
         });
     }
 
-    const handleSubmit = (ev, input) => {
+    const handleSubmit = (ev) => {
         ev.preventDefault();
         console.log(input);
-        Axios.post(`http://localhost:3001/${forms[opts.name]}`, {
+        Axios.post(`http://localhost:3001/${form.opts.name}`, {
             data: input
         })
         .then((res) => {
@@ -110,7 +111,7 @@ function CreateButton (opts) {
         });
     }
 
-    
+
     return (
         <>
             <Button variant='Light' onClick={handleShow}>{opts.name}</Button>
@@ -125,7 +126,7 @@ function CreateButton (opts) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant='secondary' onClick={handleClose}>Close</Button>
-                    <Button variant='primary' type='submit' onClick={(ev, input) => handleSubmit(ev, input)}>Submit</Button>
+                    <Button variant='primary' type='submit' onClick={handleSubmit}>Submit</Button>
                 </Modal.Footer>
             </Modal>
         </>
