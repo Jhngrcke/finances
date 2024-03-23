@@ -1,4 +1,4 @@
-import React, { useState, useFormContext } from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -40,6 +40,7 @@ function isValidAccountNumber(accountNumber) {
     return {isValidAccountNumber: accountNumberPattern.test(accountNumber), accType: accountType};
 }
 
+
 function IncomeForm({input, handleChange}) {
     return (
         <Form>
@@ -58,6 +59,7 @@ function IncomeForm({input, handleChange}) {
         </Form>
     );
 }
+
 
 function AccountForm({input, handleChange}) { 
     return (
@@ -86,15 +88,18 @@ function CreateButton (opts) {
     const handleShow = () => setShow(true);
 
 
-    const [ input, setInput ] = useState('');
+    const [input, setInput] = useState({});
 
     const handleChange = (ev) => {
-        setInput(ev.target.value);
+        setInput({
+            ...input,
+            [ev.target.name]: ev.target.value
+        });
     }
 
-    const handleSubmit = (ev) => {
+    const handleSubmit = (ev, input) => {
         ev.preventDefault();
-        console.log(ev.forms);
+        console.log(input);
         Axios.post(`http://localhost:3001/${forms[opts.name]}`, {
             data: input
         })
@@ -105,6 +110,7 @@ function CreateButton (opts) {
         });
     }
 
+    
     return (
         <>
             <Button variant='Light' onClick={handleShow}>{opts.name}</Button>
@@ -119,7 +125,7 @@ function CreateButton (opts) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant='secondary' onClick={handleClose}>Close</Button>
-                    <Button variant='primary' type='submit' onClick={handleSubmit}>Submit</Button>
+                    <Button variant='primary' type='submit' onClick={(ev, input) => handleSubmit(ev, input)}>Submit</Button>
                 </Modal.Footer>
             </Modal>
         </>
