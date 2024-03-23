@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
+import '../Components/App.css';
 import Menu from '../Components/Navbar';
 import React from 'react'; 
 
