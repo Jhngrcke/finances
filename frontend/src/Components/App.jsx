@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../Components/App.css';
-import Menu from '../Components/Navbar';
+import './App.css';
+import Menu from './Navbar';
 import React from 'react'; 
 
 function App() {
