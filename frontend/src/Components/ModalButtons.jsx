@@ -68,7 +68,7 @@ function AccountForm({input, handleChange}) {
                 <Form.Label>Card name</Form.Label>
                 <Form.Control type='text' name='cardname' placeholder='Cheque/Savings/Credit Account' onChange={handleChange} />
                 <Form.Label>Card number</Form.Label>
-                <Form.Control type='text'name='cardnum' placeholder='Enter Card Number' onChange={handleChange} />
+                <Form.Control type='text' name='cardnum' placeholder='Enter Card Number' onChange={handleChange} />
                 <Form.Label>Card type</Form.Label>
                 <Form.Select aria-label="acctype" name='cardtype' onChange={handleChange}>
                     <option value="1">Cheque</option>
