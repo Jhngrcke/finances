@@ -1,5 +1,6 @@
 import express from 'express';
 import mysql from 'mysql';
+import bodyParser from 'body-parser';
 
 
 let app = express();
@@ -14,12 +15,14 @@ app.use(function (req, res, next) {
 });
 
 
+app.use(bodyParser.json());
+
 app.post('/income', (req, res) => {
     console.log(req.body);
 });
 
 
-app.post('/account', (req, res) => {
+app.post('/account', (req) => {
     console.log(req.body);
 });
 
