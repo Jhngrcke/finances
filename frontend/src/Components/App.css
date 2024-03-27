@@ -3,3 +3,7 @@
   padding: 2rem;
 }
 
+.invalid-account {
+  color: red;
+  font-weight: bold;
+}
